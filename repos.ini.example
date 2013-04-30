@@ -1,0 +1,18 @@
+# Each section contains settings for one remote repository
+# Section name is the repo name
+[repository1]
+
+# Path to Git working tree. Required parameter.
+path=/path/to/repository1/
+
+# Remote repository name. Default value is 'origin'.
+#remote=origin
+
+# Branch to track. Default value is 'master'.
+#branch=master
+
+[repository2]
+
+path=/path/to/repository2/
+remote=bitbucket
+branch=developing
