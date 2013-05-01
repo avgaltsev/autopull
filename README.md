@@ -50,7 +50,8 @@ Configuration of [uWSGI](http://projects.unbit.it/uwsgi) and [nginx](http://ngin
 >uid=username  
 >gid=groupname  
 >chown-socket=root:root  
->chmod-socket=666\" > username.ini"  
+>chmod-socket=666  
+>umask=002\" > username.ini"  
 >$ cd /etc/uwsgi/apps-enabled/  
 >$ sudo ln -s ../apps-available/username.ini
 
