@@ -71,9 +71,10 @@ Configuration of [uWSGI](http://projects.unbit.it/uwsgi) and [nginx](http://ngin
 >location / {  
 >uwsgi_pass unix:/var/run/uwsgi/app/username/socket;  
 >include uwsgi_params;  
+>uwsgi_param SCRIPT_NAME autopull;  
 >uwsgi_param UWSGI_PYHOME /path/to/autopull/.env/;  
 >uwsgi_param UWSGI_CHDIR /path/to/autopull/;  
->uwsgi_param UWSGI_SCRIPT autopull;  
+>uwsgi_param UWSGI_MODULE autopull:application;  
 >}  
 >}\" > yoursite.com.conf"  
 >$ cd /etc/nginx/sites-enabled/  
