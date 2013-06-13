@@ -3,7 +3,7 @@ import os, subprocess, json
 from bottle import get, post, request, run, default_app
 
 
-def readConfig(filename="repos.ini"):
+def readConfig(filename="repositories.json"):
     
     return json.load(open(filename)) if os.path.isfile(filename) else {}
 
