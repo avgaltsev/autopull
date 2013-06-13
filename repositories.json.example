@@ -1,0 +1,18 @@
+{
+	"repo1": [
+		{
+			"path": "/path/to/repo1/"
+		}
+	],
+	"repo2": [
+		{
+			"path": "/path/to/repo2/",
+			"remote": "github",
+			"branch": "dev"
+		},
+		{
+			"path": "/another/path/to/repo2/",
+			"remote": "github"
+		}
+	]
+}
