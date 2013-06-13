@@ -1,27 +1,11 @@
 import os, subprocess, json
 
-from ConfigParser import ConfigParser
-
 from bottle import get, post, request, run, default_app
 
 
-def readRepos(filename="repos.ini"):
+def readConfig(filename="repos.ini"):
     
-    config = ConfigParser()
-    config.read(filename)
-    
-    repos = {}
-    
-    for section in config.sections():
-        
-        repo = {}
-        
-        for item in config.items(section):
-            repo[item[0]] = item[1]
-        
-        repos[section] = repo
-    
-    return repos
+    return json.load(open(filename)) if os.path.isfile(filename) else {}
 
 
 def pull(path, remote="origin", branch="master"):
@@ -41,31 +25,33 @@ def getIndex():
 @post("/")
 def postIndex():
     
-    repos = readRepos();
+    config = readConfig();
     
-    raw = request.forms.get("payload")
+    rawData = request.forms.get("payload")
     
-    data = json.loads(raw) if isinstance(raw, str) else {}
+    data = json.loads(rawData) if isinstance(rawData, str) else {}
     
-    if ("repository" in data) and ("name" in data["repository"]) and (data["repository"]["name"] in repos):
+    if ("repository" in data) and ("name" in data["repository"]) and (data["repository"]["name"] in config):
         
-        repo = repos[data["repository"]["name"]]
-        
-        if ("path" in repo) and (os.path.isdir(repo["path"])):
+        for repository in config[data["repository"]["name"]]:
             
-            kwargs = {}
-            
-            if "remote" in repo:
-                kwargs["remote"] = repo["remote"]
-            
-            if "branch" in repo:
-                kwargs["branch"] = repo["branch"]
-            
-            pull(repo["path"], **kwargs)
+            if ("path" in repository) and (os.path.isdir(repository["path"])):
+                
+                kwargs = {}
+                
+                if "remote" in repository:
+                    kwargs["remote"] = repository["remote"]
+                
+                if "branch" in repository:
+                    kwargs["branch"] = repository["branch"]
+                
+                pull(repository["path"], **kwargs)
 
 
 if __name__ == "__main__":
-    run(host="0.0.0.0", port=8080)
     
+    run(host="0.0.0.0", port=8080)
+
 else:
+    
     application = default_app()
