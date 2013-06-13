@@ -34,7 +34,7 @@ Configuration of [uWSGI](http://projects.unbit.it/uwsgi) and [nginx](http://ngin
 4. Deactivate virtualenv. Skip this step if you skipped step 2.
 >$ deactivate
 
-5. Make a copy of `repos.ini.example` with name `repos.ini` and configure your repos you want to track. Comments in this ini file will help you.
+5. Make a copy of `repositories.json.example` with name `repositories.json` and configure your repositories you want to track.
 
 6. Make sure you set up authorization via SSH-keys.
 
