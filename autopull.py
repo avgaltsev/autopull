@@ -10,10 +10,11 @@ def readConfig(filename="repositories.json"):
 
 def pull(path, remote="origin", branch="master"):
     
-    subprocess.call(["git", "--git-dir=" + path + "/.git/", "--work-tree=" + path, "checkout", branch])
+    os.chdir(path);
+    subprocess.call(["git", "checkout", branch])
     #subprocess.call(["git", "--git-dir=" + path + "/.git/", "--work-tree=" + path, "pull", remote, branch]) # Updates working tree fine, but doesn"t update remote branch ref.
-    subprocess.call(["git", "--git-dir=" + path + "/.git/", "--work-tree=" + path, "fetch", remote])
-    subprocess.call(["git", "--git-dir=" + path + "/.git/", "--work-tree=" + path, "merge", remote + "/" + branch])
+    subprocess.call(["git", "fetch", remote])
+    subprocess.call(["git", "merge", remote + "/" + branch])
 
 
 @get("/")
