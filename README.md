@@ -25,7 +25,7 @@ Configuration of [uWSGI](http://projects.unbit.it/uwsgi) and [nginx](http://ngin
 
 2. Go to the repo dir, make virtual environment for Python and activate it. You may skip this step if you don't need this.
 >$ cd /path/to/autopull  
->$ virtualenv .env  
+>$ virtualenv --no-site-packages .env  
 >$ source .env/bin/activate
 
 3. Install [Bottle](http://bottlepy.org) framework.
@@ -43,7 +43,7 @@ Configuration of [uWSGI](http://projects.unbit.it/uwsgi) and [nginx](http://ngin
 1. Install it.
 >$ sudo aptitude install uwsgi uwsgi-plugin-python
 
-2. Make configuration file for multiple interpreter mode for a local user. This user should have write permissions to local repositories.
+2. Make configuration file for multiple interpreter mode for a local user. This user should have write permissions on local repositories.
 >$ cd /etc/uwsgi/apps-available/  
 >$ sudo sh -c "echo \"[uwsgi]  
 >plugins=python  
