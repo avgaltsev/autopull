@@ -51,9 +51,12 @@ Configuration of [uWSGI](http://projects.unbit.it/uwsgi) and [nginx](http://ngin
 >gid=groupname  
 >chown-socket=root:root  
 >chmod-socket=666  
->umask=002\" > username.ini"  
+>umask=002  
+>home=/path/to/autopull/.env/  
+>chdir=/path/to/autopull/  
+>module=autopull.wsgi:application\" > autopull.ini"  
 >$ cd /etc/uwsgi/apps-enabled/  
->$ sudo ln -s ../apps-available/username.ini
+>$ sudo ln -s ../apps-available/autopull.ini
 
 3. Restart uWSGI.
 >$ sudo service uwsgi restart
@@ -69,12 +72,8 @@ Configuration of [uWSGI](http://projects.unbit.it/uwsgi) and [nginx](http://ngin
 >server_name yoursite.com;  
 >listen 8080;  
 >location / {  
->uwsgi_pass unix:/var/run/uwsgi/app/username/socket;  
+>uwsgi_pass unix:/var/run/uwsgi/app/autopull/socket;  
 >include uwsgi_params;  
->uwsgi_param SCRIPT_NAME autopull;  
->uwsgi_param UWSGI_PYHOME /path/to/autopull/.env/;  
->uwsgi_param UWSGI_CHDIR /path/to/autopull/;  
->uwsgi_param UWSGI_MODULE autopull:application;  
 >}  
 >}\" > yoursite.com.conf"  
 >$ cd /etc/nginx/sites-enabled/  
